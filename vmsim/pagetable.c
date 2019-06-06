@@ -56,11 +56,12 @@ void pagetable_test_entry(uint vfn, int l1, int l2);
 void pagetable_init() {
   int level;
   uint page_bits, bits;
-  page_bits = log_2(opts.pagesize);
+  page_bits = log_2(opts.pagesize); // page_bits -> offset
   if (page_bits == -1) {
     fprintf(stderr, "vmsim: Pagesize must be a power of 2\n");
     abort();
   }
+  //pagina = espacio de direcciones - offset
   vfn_bits = addr_space_bits - page_bits;
 
   bits = 0;
@@ -71,7 +72,7 @@ void pagetable_init() {
       break;
     level++;
   }
-
+  // solo se hace para ultimo nivel
   levels[level].log_size = levels[level].log_size - (bits - vfn_bits);
   levels[level].size = pow_2(levels[level].log_size);
   levels[level].is_leaf = TRUE;

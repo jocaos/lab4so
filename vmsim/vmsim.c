@@ -89,7 +89,7 @@ void simulate() {
 	      fflush(stdout);
       }
     }
-    
+    printf("\nvaddr_to_vfn(vaddr): %d\n", vaddr_to_vfn(vaddr));
     pte = pagetable_lookup_vaddr(vaddr_to_vfn(vaddr), type);
     if (!pte->valid) {
       /* Fault */
