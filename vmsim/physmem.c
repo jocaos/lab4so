@@ -28,7 +28,7 @@ void physmem_evict(uint pfn, ref_kind_t type) {
   }
 
   stats_evict(type);
-  if (physmem[pfn]->modified) {
+  if (physmem[pfn]->modified) { // se ha modificado la pagina
     stats_evict_dirty(type);
   }
 
@@ -38,9 +38,9 @@ void physmem_evict(uint pfn, ref_kind_t type) {
 }
 
 void physmem_load(uint pfn, pte_t *new_page, ref_kind_t type) {
-  assert(0 <= pfn && pfn < opts.phys_pages);
-  assert(new_page && !new_page->valid);
-  assert(physmem[pfn] == NULL);
+  assert(0 <= pfn && pfn < opts.phys_pages); //marco en el rango
+  assert(new_page && !new_page->valid); //pagina no nula y sin marco o no valida
+  assert(physmem[pfn] == NULL); //el espacio donde se guarda este vacio
 
   physmem[pfn] = new_page;
 
